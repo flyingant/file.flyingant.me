@@ -1,4 +1,5 @@
 body {
+  font-family: sans-serif;
   margin: 0;
   padding: 0;
   background-color: #FFFFFF;
@@ -8,14 +9,41 @@ body {
   max-width: 880px;
   min-width: 420px;
   margin: 60px auto;
-
+  padding: 0 20px;
   .uploadField {
-    height: 40px;
     text-align: center;
+    .fileContainer {
+      position: relative;
+      margin: 0 auto 40px auto;
+      max-width: 640px;
+      min-width: 360px;
+      height: 80px;
+      border: 2px dashed #cccccc;
+      .cover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 80px;
+        line-height: 80px;
+        color: #cccccc;
+        z-index: 1;
+      }
+      input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 80px;
+        z-index: 100;
+        opacity: 0;
+      }
+    }
+
     button {
+      vertical-align: bottom;
       font-size: 16px;
       width: 120px;
-      height: 40px;
       text-align: center;
       line-height: 40px;
       border-radius: 4px;
@@ -32,7 +60,6 @@ body {
   }
 
   .searchField {
-    width: 100%;
     height: 30px;
     text-align: right;
     margin: 80px 0 20px 0;
@@ -52,12 +79,14 @@ body {
       vertical-align: top;
       padding: 0;
       margin-left: -2px;
-      border: 1px solid #cccccc;
-      background-color: white;
+      color: white;
+      background-color: #1d9d74;
+      border: none;
       &:hover {
         cursor: pointer;
-        color: white;
-        background-color: #1d9d74;
+        color: #1d9d74;
+        border: 1px solid #1d9d74;
+        background-color: white;
       }
     }
   }

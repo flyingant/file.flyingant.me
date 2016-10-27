@@ -5,8 +5,6 @@ import rootReducer from '../reducers/Reducers';
 import createSagaMiddleware from 'redux-saga';
 import sagas from '../saga/RootSagas';
 
-import networkMiddleware from '../middleware/NetworkMiddleware';
-
 const reducer = combineReducers({
     root: rootReducer
 });
@@ -15,7 +13,6 @@ const reducer = combineReducers({
 const sagaMiddleware = createSagaMiddleware()
 
 const enhancer = compose(
-    applyMiddleware(networkMiddleware),
     applyMiddleware(thunk, sagaMiddleware)
 );
 

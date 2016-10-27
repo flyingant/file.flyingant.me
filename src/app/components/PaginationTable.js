@@ -10,10 +10,12 @@ class PaginationTable extends React.Component {
         <small className={styles.count}>Total: 88</small>
         <table>
           <thead>
-            <th>#</th>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Size</th>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Size</th>
+            </tr>
           </thead>
           <tbody>
             <tr>
@@ -36,6 +38,11 @@ class PaginationTable extends React.Component {
             </tr>
           </tbody>
         </table>
+        <div className={styles.pagination}>
+          <span className={styles.previous}><i className="fa fa-chevron-left"></i></span>
+          <span>1 / 8</span>
+          <span className={styles.next}><i className="fa fa-chevron-right"></i></span>
+        </div>
       </div>
     );
   }

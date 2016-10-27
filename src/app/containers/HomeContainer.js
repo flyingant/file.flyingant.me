@@ -4,9 +4,8 @@ import styles from '../stylesheet/less/main.less';
 
 // actions
 import {
-    initializeAppThroughSaga,
-    initializeAppThroughThunk
-} from '../actions/RootActions';
+    uploadFile
+} from '../actions/FileActions';
 
 // components
 import Header from '../components/Header';
@@ -14,12 +13,30 @@ import PaginationTable from '../components/PaginationTable';
 
 class HomeContainer extends React.Component {
 
-    handleActionByThunk() {
-        this.props.dispatch(initializeAppThroughThunk({status: 'Initializing through thunk'}));
+    constructor (props, context) {
+        super(props, context);
+        this.state ={
+            selectedFile: null,
+            selectedFileName: ""
+        };
+        this.handleSelectFile = this.handleSelectFile.bind(this);
+        this.handleUploadFile = this.handleUploadFile.bind(this);
     }
 
-    handleActionBySaga() {
-        this.props.dispatch(initializeAppThroughSaga({status: 'Initializing through Saga'}));
+    handleSelectFile(event) {
+        let fileName = event.target.files[0].name;
+        this.setState({
+            selectedFile: event.target.files[0],
+            selectedFileName: fileName
+        });
+    }
+
+    handleUploadFile() {
+        var formData = new FormData();
+        formData.append('file', this.state.selectedFile);
+        this.props.dispatch(uploadFile({
+            formData: formData
+        }));
     }
 
     render() {
@@ -28,8 +45,13 @@ class HomeContainer extends React.Component {
                 <Header/>
                 <div className={styles.container}>
                     <div className={styles.uploadField}>
-                        <input type="file" name="filee"/>
-                        <button>Upload</button>
+                        <div className={styles.fileContainer}>
+                            <div className={styles.cover}>
+                                {this.state.selectedFileName === "" ? "Drag and drop a file here or click here" : this.state.selectedFileName}
+                            </div>
+                            <input ref="file" type="file" name="file" onChange={this.handleSelectFile}/>
+                        </div>
+                        <button onClick={this.handleUploadFile}>Upload</button>
                     </div>
                     <div className={styles.searchField}>
                         <input type="text" name="search" />

@@ -32,6 +32,7 @@ module.exports = {
         filename: "[name].bundle.js",
         publicPath: 'http://localhost:3000/dev/'
     },
+
     module: {
         loaders: [
             {

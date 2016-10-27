@@ -19,9 +19,7 @@ module.exports = {
     console.log('Request Data', data);
     return new Promise((resolve, reject) => {
       agent
-        .get(BASE_URL + 'api/file/filter')
-        .set('Accept', 'application/json')
-        .set('Content-Type', 'application/json')
+        .post(BASE_URL + 'api/file/filter')
         .send({
           queryString: data.payload.queryString,
           offset: data.payload.offset,

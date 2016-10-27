@@ -18,9 +18,9 @@ class HomeContainer extends React.Component {
     constructor (props, context) {
         super(props, context);
         this.state ={
-            queryString: '',
-            offset: '',
-            max: '',
+            queryString: this.props.app.queryString,
+            offset: this.props.app.offset,
+            max: this.props.app.max,
             selectedFile: null,
             selectedFileName: ""
         };
@@ -69,7 +69,6 @@ class HomeContainer extends React.Component {
 
     render() {
         const { app } = this.props;
-        console.log('Date:', this.props.app)
         return (
             <div>
                 <Header/>

@@ -16,17 +16,19 @@ class PaginationTable extends React.Component {
               <th>Type</th>
               <th>Size</th>
               <th>Create Date</th>
+              <th>Download</th>
             </tr>
           </thead>
           <tbody>
           { this.props.data.map((file) => {
             return (
-              <tr>
+              <tr key={file.uuid.substring(0, 6)}>
                 <td>{file.uuid.substring(0, 6)}</td>
                 <td>{file.name}</td>
                 <td>{file.mimeType}</td>
-                <td>{file.size}</td>
+                <td>{parseInt(Number(file.size)/1000) + ' KB'}</td>
                 <td>{file.dateCreated}</td>
+                <td><a className="fa fa-download" href={file.externalLink}></a></td>
               </tr>
             )
           })}

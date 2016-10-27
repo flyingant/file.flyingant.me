@@ -16,7 +16,22 @@ module.exports = {
   },
 
   filter: (data) => {
-
+    console.log('Request Data', data);
+    return new Promise((resolve, reject) => {
+      agent
+        .get(BASE_URL + 'api/file/filter')
+        .set('Accept', 'application/json')
+        .set('Content-Type', 'application/json')
+        .send({
+          queryString: data.payload.queryString,
+          offset: data.payload.offset,
+          max: data.payload.max
+        })
+        .end((err, res) => {
+          if (err || res.statusCode !== 200) return reject(res || err)
+          resolve(res.body)
+        })
+    })
   }
 
 }

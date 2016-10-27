@@ -4,6 +4,8 @@ import styles from '../stylesheet/less/main.less';
 
 // actions
 import {
+    filterFiles,
+    selectFile,
     uploadFile
 } from '../actions/FileActions';
 
@@ -16,19 +18,45 @@ class HomeContainer extends React.Component {
     constructor (props, context) {
         super(props, context);
         this.state ={
+            queryString: '',
+            offset: '',
+            max: '',
             selectedFile: null,
             selectedFileName: ""
         };
+        this.handleChangeQuery = this.handleChangeQuery.bind(this);
+        this.handleFilterFiles = this.handleFilterFiles.bind(this);
         this.handleSelectFile = this.handleSelectFile.bind(this);
         this.handleUploadFile = this.handleUploadFile.bind(this);
     }
 
-    handleSelectFile(event) {
-        let fileName = event.target.files[0].name;
+    componentDidMount() {
+        this.handleFilterFiles();
+    }
+
+    handleFilterFiles() {
+        this.props.dispatch(filterFiles({
+            queryString: this.state.queryString,
+            offset: this.state.offset,
+            max: this.state.max
+        }))
+    }
+
+    handleChangeQuery(event) {
         this.setState({
-            selectedFile: event.target.files[0],
-            selectedFileName: fileName
+            queryString: event.target.value,
         });
+    }
+
+    handleSelectFile(event) {
+        let file = event.target.files[0];
+        this.setState({
+            selectedFile: file,
+            selectedFileName: file.name
+        });
+        this.props.dispatch(selectFile({
+            file: file
+        }));
     }
 
     handleUploadFile() {
@@ -40,6 +68,8 @@ class HomeContainer extends React.Component {
     }
 
     render() {
+        const { app } = this.props;
+        console.log('Date:', this.props.app)
         return (
             <div>
                 <Header/>
@@ -54,11 +84,11 @@ class HomeContainer extends React.Component {
                         <button onClick={this.handleUploadFile}>Upload</button>
                     </div>
                     <div className={styles.searchField}>
-                        <input type="text" name="search" />
-                        <button><i className="fa fa-search fa-2x"></i></button>
+                        <input type="text" name="search" onChange={this.handleChangeQuery}/>
+                        <button onClick={this.handleFilterFiles}><i className="fa fa-search fa-2x"></i></button>
                     </div>
 
-                    <PaginationTable />
+                    <PaginationTable data={app.files} totalCount={app.totalCount} />
                 </div>
             </div>
         );

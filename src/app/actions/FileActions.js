@@ -1,5 +1,5 @@
-
 import {
+  SELECT_FILE,
   UPLOAD_FILE,
   UPLOAD_FILE_COMPLETED,
   UPLOAD_FILE_FAILED,
@@ -7,6 +7,13 @@ import {
   FILTER_FILES_COMPLETED,
   FILTER_FILES_FAILED
 } from './FileActionTypes';
+
+export function selectFile(payload) {
+  return {
+    type: SELECT_FILE,
+    payload: payload
+  };
+}
 
 export function uploadFile(payload) {
   return {

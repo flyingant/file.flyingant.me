@@ -35,9 +35,15 @@ class PaginationTable extends React.Component {
           </tbody>
         </table>
         <div className={styles.pagination}>
-          <span className={styles.previous}><i className="fa fa-chevron-left"></i></span>
-          <span>1 / 8</span>
-          <span className={styles.next}><i className="fa fa-chevron-right"></i></span>
+          { this.props.hasPrevious
+            ? <span className={styles.previous}><i className="fa fa-chevron-left"></i></span>
+            : null
+          }
+          <span>{ Math.floor((this.props.offset + this.props.max -1) / this.props.max) } / { Math.floor((this.props.totalCount + this.props.max -1) / this.props.max) }</span>
+          { this.props.hasNext
+            ? <span className={styles.next}><i className="fa fa-chevron-right"></i></span>
+            : null
+          }
         </div>
       </div>
     );

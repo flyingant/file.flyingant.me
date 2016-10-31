@@ -87,7 +87,7 @@ class HomeContainer extends React.Component {
                         <button onClick={this.handleFilterFiles}><i className="fa fa-search fa-2x"></i></button>
                     </div>
 
-                    <PaginationTable data={app.files} totalCount={app.totalCount} />
+                    <PaginationTable data={app.files} offset={app.offset} max={app.max} totalCount={app.totalCount} hasPrevius={app.hasPrevious} hasNext={app.hasNext}/>
                 </div>
             </div>
         );

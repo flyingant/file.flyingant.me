@@ -1,2 +1,1 @@
-export const [REQUEST, RESPONSE, FAILURE] = ["_REQUEST", "_RESPONSE", "_FAILURE"];
-export const BASE_URL = 'http://localhost:8080/';
+export const BASE_URL = 'http://www.flyingant.me/';

@@ -20,7 +20,7 @@ module.exports = {
     },
 
     output: {
-        path: path.join(__dirname, '../webapp'),
+        path: path.join(__dirname, '../docs'),
         filename: "[name].bundle.min.js",
         publicPath: '/'
     },

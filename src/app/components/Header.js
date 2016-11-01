@@ -7,7 +7,7 @@ class Header extends React.Component {
   render() {
     return (
       <div className={styles.header}>
-        <i className={cn(styles.icon, 'fa fa-navicon fa-2x')}></i>
+        {/*<i className={cn(styles.icon, 'fa fa-navicon fa-2x')}></i>*/}
       </div>
     );
   }

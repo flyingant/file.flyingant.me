@@ -19,8 +19,6 @@ class HomeContainer extends React.Component {
         super(props, context);
         this.state ={
             queryString: this.props.app.queryString,
-            offset: this.props.app.offset,
-            max: this.props.app.max,
             selectedFile: null,
             selectedFileName: ""
         };
@@ -28,6 +26,8 @@ class HomeContainer extends React.Component {
         this.handleFilterFiles = this.handleFilterFiles.bind(this);
         this.handleSelectFile = this.handleSelectFile.bind(this);
         this.handleUploadFile = this.handleUploadFile.bind(this);
+        this.onSelectPrevious = this.onSelectPrevious.bind(this);
+        this.onSelectNext = this.onSelectNext.bind(this);
     }
 
     componentDidMount() {
@@ -37,8 +37,8 @@ class HomeContainer extends React.Component {
     handleFilterFiles() {
         this.props.dispatch(filterFiles({
             queryString: this.state.queryString,
-            offset: this.state.offset,
-            max: this.state.max
+            offset: 0,
+            max: 10
         }))
     }
 
@@ -67,6 +67,29 @@ class HomeContainer extends React.Component {
         }));
     }
 
+    onSelectPrevious() {
+        let offset = this.props.app.offset;
+        const max = this.props.app.max;
+        offset = offset - max;
+        this.props.dispatch(filterFiles({
+            queryString: this.props.app.queryString,
+            offset: offset < 0 ? 0 : offset,
+            max: max
+        }))
+    }
+
+    onSelectNext() {
+        let offset = this.props.app.offset;
+        const max = this.props.app.max;
+        const totalCount = this.props.app.totalCount;
+        offset = offset + max;
+        this.props.dispatch(filterFiles({
+            queryString: this.props.app.queryString,
+            offset: offset > totalCount ? totalCount : offset,
+            max: max
+        }))
+    }
+
     render() {
         const { app } = this.props;
         return (
@@ -87,7 +110,14 @@ class HomeContainer extends React.Component {
                         <button onClick={this.handleFilterFiles}><i className="fa fa-search fa-2x"></i></button>
                     </div>
 
-                    <PaginationTable data={app.files} offset={app.offset === 0 ? 1 : app.offset} max={app.max} totalCount={app.totalCount} hasPrevius={app.hasPrevious} hasNext={app.hasNext}/>
+                    <PaginationTable
+                      data={app.files}
+                      offset={app.offset}
+                      max={app.max}
+                      totalCount={app.totalCount}
+                      onSelectPrevious={this.onSelectPrevious}
+                      onSelectNext={this.onSelectNext}
+                      />
                 </div>
             </div>
         );

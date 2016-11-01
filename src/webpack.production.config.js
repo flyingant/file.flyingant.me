@@ -20,8 +20,8 @@ module.exports = {
     },
 
     output: {
-        path: path.join(__dirname, './build'),
-        filename: "[name].bundle.js",
+        path: path.join(__dirname, '../webapp'),
+        filename: "[name].bundle.min.js",
         publicPath: '/'
     },
 
@@ -34,19 +34,28 @@ module.exports = {
                 exclude: path.resolve(__dirname, "node_modules")
             },
             {
-                test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
+                test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$|\.eot$/,
                 loader: "file-loader?name=[path][name].[ext]"
             },
+            {
+                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+            {
+                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "file-loader" },
             {
                 test: /\.less$/, loader: "style-loader!css-loader?modules!less"
             },
             {
+                test: /\.scss$/, loader: "style-loader!css-loader?modules!sass"
+            },
+            {
                 test: /\.css$/, loader: "style-loader!css-loader?modules",
-                exclude: path.resolve(__dirname, "node_modules")
+                exclude: path.resolve(__dirname, "app/stylesheet/css")
             },
             {
                 test: /\.css$/, loader: "style-loader!css-loader?",
-                include: path.resolve(__dirname, "node_modules")
+                include: path.resolve(__dirname, "app/stylesheet/css")
             }
         ]
     },

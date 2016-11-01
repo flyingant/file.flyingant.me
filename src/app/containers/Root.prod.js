@@ -1,12 +1,12 @@
 import React, {PropTypes} from 'react';
 import {Provider} from 'react-redux';
-import AppContainer from './AppContainer';
+import {createRouter} from '../routes';
 
 export default function Root(props) {
     return (
         <Provider store={props.store}>
             <div>
-                <AppContainer />
+              { createRouter() }
             </div>
         </Provider>
     );

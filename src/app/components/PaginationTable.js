@@ -5,9 +5,15 @@ import cn from 'classnames';
 class PaginationTable extends React.Component {
 
   render() {
+    const { offset, max, totalCount } = this.props;
+    let currentPage = Math.ceil((offset + max -1) / max);
+    let totalPages = Math.floor((totalCount + max -1) / max);
+    let hasPrevious = currentPage !== 1;
+    let hasNext = currentPage !== totalPages;
+
     return (
       <div className={styles.table}>
-        <small className={styles.count}>Total: {this.props.totalCount}</small>
+        <small className={styles.count}>Total: {totalCount}</small>
         <table>
           <thead>
             <tr>
@@ -35,13 +41,13 @@ class PaginationTable extends React.Component {
           </tbody>
         </table>
         <div className={styles.pagination}>
-          { this.props.hasPrevious
-            ? <span className={styles.previous}><i className="fa fa-chevron-left"></i></span>
+          { hasPrevious
+            ? <span className={styles.previous} onClick={this.props.onSelectPrevious}><i className="fa fa-chevron-left"></i></span>
             : null
           }
-          <span>{ Math.floor((this.props.offset + this.props.max -1) / this.props.max) } / { Math.floor((this.props.totalCount + this.props.max -1) / this.props.max) }</span>
-          { this.props.hasNext
-            ? <span className={styles.next}><i className="fa fa-chevron-right"></i></span>
+          <span>{ currentPage } / { totalPages }</span>
+          { hasNext
+            ? <span className={styles.next} onClick={this.props.onSelectNext}><i className="fa fa-chevron-right"></i></span>
             : null
           }
         </div>

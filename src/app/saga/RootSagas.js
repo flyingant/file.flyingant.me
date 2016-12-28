@@ -2,8 +2,8 @@ import {takeEvery} from 'redux-saga';
 import {put, call, select} from 'redux-saga/effects';
 import api from '../api';
 
-import {UPLOAD_FILE, FILTER_FILES} from '../actions/FileActionTypes';
-import {uploadFileCompleted, uploadFileFailed, filterFiles, filterFilesCompleted, filterFilesFailed} from '../actions/FileActions';
+import {UPLOAD_FILE, FILTER_FILES, CREATE_QRCODE} from '../actions/FileActionTypes';
+import {uploadFileCompleted, uploadFileFailed, filterFiles, filterFilesCompleted, filterFilesFailed, createQRCompleted} from '../actions/FileActions';
 import {busy, busyCompleted} from '../actions/CommonActions';
 
 const getState = state => state.root.get('app').toJS();
@@ -38,6 +38,17 @@ function* handleFilterFiles(data) {
     }
 }
 
+function* handleCreateQRCode(data) {
+    try {
+        yield put(busy());
+        var result = yield call(api.createQRCode, data)
+        yield put(createQRCompleted(result));
+        yield put(busyCompleted());
+    } catch (e) {
+        yield put(busyCompleted());
+    }
+}
+
 export function* watchFilterFiles() {
     yield* takeEvery(FILTER_FILES, handleFilterFiles);
 }
@@ -46,9 +57,14 @@ export function* watchUploadFile() {
     yield* takeEvery(UPLOAD_FILE, handleUploadFile);
 }
 
+export function* watchCreateQRCode() {
+    yield* takeEvery(CREATE_QRCODE, handleCreateQRCode);
+}
+
 export default function* root() {
     yield [
         watchFilterFiles(),
-        watchUploadFile()
+        watchUploadFile(),
+        watchCreateQRCode()
     ]
 }

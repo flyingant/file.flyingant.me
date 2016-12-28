@@ -16,7 +16,6 @@ module.exports = {
   },
 
   filter: (data) => {
-    console.log('Request Data', data);
     return new Promise((resolve, reject) => {
       agent
         .post(BASE_URL + 'api/file/filter')
@@ -30,6 +29,17 @@ module.exports = {
           resolve(res.body)
         })
     })
-  }
+  },
+
+    createQRCode: (data) => {
+        return new Promise((resolve, reject) => {
+            agent
+                .get(BASE_URL + 'qrcode/json' + '?withBase64=true&content=' + data.payload.link)
+                .end((err, res) => {
+                    if (err || res.statusCode !== 200) return reject(res || err)
+                    resolve(res.body)
+                })
+        })
+    }
 
 }

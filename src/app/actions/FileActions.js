@@ -5,7 +5,10 @@ import {
   UPLOAD_FILE_FAILED,
   FILTER_FILES,
   FILTER_FILES_COMPLETED,
-  FILTER_FILES_FAILED
+  FILTER_FILES_FAILED,
+  CREATE_QRCODE,
+  CREATE_QRCODE_COMPLETED,
+  CLEAR_QRCODE
 } from './FileActionTypes';
 
 export function selectFile(payload) {
@@ -56,3 +59,25 @@ export function filterFilesFailed(payload) {
     payload: payload
   };
 }
+
+export function createQRcode(payload) {
+  return {
+    type: CREATE_QRCODE,
+    payload: payload
+  };
+}
+
+export function createQRCompleted(payload) {
+  return {
+    type: CREATE_QRCODE_COMPLETED,
+    payload: payload
+  };
+}
+
+export function clearQRCode() {
+  return {
+    type: CLEAR_QRCODE
+  };
+}
+
+

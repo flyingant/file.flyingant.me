@@ -6,7 +6,9 @@ import styles from '../stylesheet/less/main.less';
 import {
     filterFiles,
     selectFile,
-    uploadFile
+    uploadFile,
+    createQRcode,
+    clearQRCode
 } from '../actions/FileActions';
 
 // components
@@ -28,6 +30,8 @@ class HomeContainer extends React.Component {
         this.handleUploadFile = this.handleUploadFile.bind(this);
         this.onSelectPrevious = this.onSelectPrevious.bind(this);
         this.onSelectNext = this.onSelectNext.bind(this);
+        this.onCreateQRCode = this.onCreateQRCode.bind(this);
+        this.onClearQRCode = this.onClearQRCode.bind(this);
     }
 
     componentDidMount() {
@@ -90,6 +94,16 @@ class HomeContainer extends React.Component {
         }))
     }
 
+    onCreateQRCode(link) {
+        this.props.dispatch(createQRcode({
+            link: link
+        }));
+    }
+
+    onClearQRCode() {
+        this.props.dispatch(clearQRCode());
+    }
+
     render() {
         const { app } = this.props;
         return (
@@ -105,6 +119,14 @@ class HomeContainer extends React.Component {
                         </div>
                         <button onClick={this.handleUploadFile}>Upload</button>
                     </div>
+                    {
+                        app.qrcode.length > 0
+                            ?   <div className={styles.qrcode}>
+                                    <a onClick={this.onClearQRCode}>&times;</a>
+                                    <img width="300" height="300" src={app.qrcode}/>
+                                </div>
+                            : null
+                    }
                     <div className={styles.searchField}>
                         <input type="text" name="search" onChange={this.handleChangeQuery}/>
                         <button onClick={this.handleFilterFiles}><i className="fa fa-search fa-2x"></i></button>
@@ -117,6 +139,7 @@ class HomeContainer extends React.Component {
                       totalCount={app.totalCount}
                       onSelectPrevious={this.onSelectPrevious}
                       onSelectNext={this.onSelectNext}
+                      onCreateQRCode={this.onCreateQRCode}
                       />
                 </div>
             </div>

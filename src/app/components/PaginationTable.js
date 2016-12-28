@@ -56,12 +56,12 @@ class PaginationTable extends React.Component {
         <div className={styles.pagination}>
           { hasPrevious
             ? <span className={styles.previous} onClick={this.props.onSelectPrevious}><i className="fa fa-chevron-left"></i></span>
-            : null
+              : <span className={styles.previous}><i className="fa fa-chevron-left" style={{color: "#DDD"}}></i></span>
           }
           <span>{ currentPage } / { totalPages }</span>
           { hasNext
             ? <span className={styles.next} onClick={this.props.onSelectNext}><i className="fa fa-chevron-right"></i></span>
-            : null
+              : <span className={styles.next}><i className="fa fa-chevron-right" style={{color: "#DDD"}}></i></span>
           }
         </div>
       </div>

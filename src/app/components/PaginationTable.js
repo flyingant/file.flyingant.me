@@ -38,7 +38,7 @@ class PaginationTable extends React.Component {
           <tbody>
           { this.props.data.map((file) => {
             return (
-              <tr key={file.uuid.substring(0, 6)}>
+                <tr data-uuid={file.uuid} key={file.uuid.substring(0, 6)}>
                 <td>{file.uuid.substring(0, 6)}</td>
                 <td>{file.name}</td>
                 <td>{file.mimeType}</td>
@@ -54,6 +54,14 @@ class PaginationTable extends React.Component {
                   <a onClick={() => this.props.onCreateQRCode(file.externalLink)}>
                     <FontAwesome name="qrcode"/>
                   </a>
+                  {
+                    file.mimeType.indexOf('image') !== -1
+                        ? <a href={`http://www.flyingant.me/file/v/${file.uuid}`} target="_blank">
+                      <FontAwesome name="bookmark"/>
+                    </a>
+                        : null
+                  }
+
                 </td>
               </tr>
             )

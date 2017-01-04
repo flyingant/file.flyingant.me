@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from '../stylesheet/less/main.less';
+const FontAwesome = require('react-fontawesome');
 
 // actions
 import {
@@ -129,7 +130,7 @@ class HomeContainer extends React.Component {
                     }
                     <div className={styles.searchField}>
                         <input type="text" name="search" onChange={this.handleChangeQuery}/>
-                        <button onClick={this.handleFilterFiles}><i className="fa fa-search fa-2x"></i></button>
+                        <button onClick={this.handleFilterFiles}><FontAwesome name="search" size="2x"/></button>
                     </div>
 
                     <PaginationTable

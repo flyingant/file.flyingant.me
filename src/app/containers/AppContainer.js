@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import BusySpinner from '../components/common/BusySpinner';
-require('../stylesheet/css/font-awesome.css');
 
 class AppContainer extends React.Component {
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from '../stylesheet/less/_table.less';
 import cn from 'classnames';
+const FontAwesome = require('react-fontawesome');
 
 class PaginationTable extends React.Component {
 
@@ -44,9 +45,15 @@ class PaginationTable extends React.Component {
                 <td>{parseInt(Number(file.size)/1000) + ' KB'}</td>
                 <td>{file.dateCreated}</td>
                 <td>
-                  <a className="fa fa-download" href={file.externalLink}></a>
-                  <a className="fa fa-clipboard" onClick={() => this.onClickToCopy(file.externalLink)}></a>
-                  <a className="fa fa-qrcode" onClick={() => this.props.onCreateQRCode(file.externalLink)}></a>
+                  <a href={file.externalLink}>
+                    <FontAwesome name="download"/>
+                  </a>
+                  <a onClick={() => this.onClickToCopy(file.externalLink)}>
+                    <FontAwesome name="clipboard"/>
+                  </a>
+                  <a onClick={() => this.props.onCreateQRCode(file.externalLink)}>
+                    <FontAwesome name="qrcode"/>
+                  </a>
                 </td>
               </tr>
             )

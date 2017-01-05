@@ -27,6 +27,8 @@
         height: 55px;
         td {
           text-align: center;
+          max-width: 160px;
+          overflow: hidden;
           height: 36px;
           font-size: 14px;
           border-bottom: 1px solid #ccc;
@@ -42,6 +44,12 @@
             }
           }
         }
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      .mobileToHide {
+        display: none;
       }
     }
   }

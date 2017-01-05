@@ -27,11 +27,11 @@ class PaginationTable extends React.Component {
         <table>
           <thead>
             <tr>
-              <th>#</th>
+              <th className={styles.mobileToHide}>#</th>
               <th>Name</th>
-              <th>Type</th>
+              <th className={styles.mobileToHide}>Type</th>
               <th>Size</th>
-              <th>Create Date</th>
+              <th className={styles.mobileToHide}>Create Date</th>
               <th>Operation</th>
             </tr>
           </thead>
@@ -39,11 +39,11 @@ class PaginationTable extends React.Component {
           { this.props.data.map((file) => {
             return (
                 <tr data-uuid={file.uuid} key={file.uuid.substring(0, 6)}>
-                <td>{file.uuid.substring(0, 6)}</td>
+                <td className={styles.mobileToHide}>{file.uuid.substring(0, 6)}</td>
                 <td>{file.name}</td>
-                <td>{file.mimeType}</td>
+                <td className={styles.mobileToHide}>{file.mimeType}</td>
                 <td>{parseInt(Number(file.size)/1000) + ' KB'}</td>
-                <td>{file.dateCreated}</td>
+                <td className={styles.mobileToHide}>{file.dateCreated}</td>
                 <td>
                   <a href={file.externalLink}>
                     <FontAwesome name="download"/>

@@ -114,7 +114,7 @@ class HomeContainer extends React.Component {
                     <div className={styles.uploadField}>
                         <div className={styles.fileContainer}>
                             <div className={styles.cover}>
-                                {this.state.selectedFileName === "" ? "Drag and drop a file here or Click here to select file" : this.state.selectedFileName}
+                                {this.state.selectedFileName === "" ? "Drop a file here or Click to select file" : this.state.selectedFileName}
                             </div>
                             <input ref="file" type="file" name="file" onChange={this.handleSelectFile}/>
                         </div>

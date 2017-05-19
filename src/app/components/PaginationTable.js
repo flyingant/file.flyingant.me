@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from '../stylesheet/less/_table.less';
+import moment from 'moment';
 import cn from 'classnames';
+
 const FontAwesome = require('react-fontawesome');
 
 class PaginationTable extends React.Component {
@@ -27,7 +29,6 @@ class PaginationTable extends React.Component {
         <table>
           <thead>
             <tr>
-              <th className={styles.mobileToHide}>#</th>
               <th>Name</th>
               <th className={styles.mobileToHide}>Type</th>
               <th>Size</th>
@@ -38,12 +39,11 @@ class PaginationTable extends React.Component {
           <tbody>
           { this.props.data.map((file) => {
             return (
-                <tr data-uuid={file.uuid} key={file.uuid.substring(0, 6)}>
-                <td className={styles.mobileToHide}>{file.uuid.substring(0, 6)}</td>
+                <tr data-uuid={file.uuid} key={file.uuid}>
                 <td>{file.name}</td>
                 <td className={styles.mobileToHide}>{file.mimeType}</td>
                 <td>{parseInt(Number(file.size)/1000) + ' KB'}</td>
-                <td className={styles.mobileToHide}>{file.dateCreated}</td>
+                  <td className={styles.mobileToHide}>{moment(file.dateCreated).fromNow()}</td>
                 <td>
                   <a href={file.externalLink}>
                     <FontAwesome name="download"/>

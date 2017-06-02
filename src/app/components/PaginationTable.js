@@ -13,6 +13,7 @@ class PaginationTable extends React.Component {
   }
 
   onClickToCopy (link) {
+    document.execCommand('copy');
     window.prompt("Copy the link to clipboard: Ctrl+C or Command+C, Enter", link);
   }
 

@@ -55,12 +55,14 @@ class HomeContainer extends React.Component {
 
     handleSelectFile(event) {
         let file = event.target.files[0];
+        let formData = new FormData();
         this.setState({
             selectedFile: file,
             selectedFileName: file.name
         });
-        this.props.dispatch(selectFile({
-            file: file
+        formData.append('file', file);
+        this.props.dispatch(uploadFile({
+            formData: formData
         }));
     }
 
@@ -114,11 +116,11 @@ class HomeContainer extends React.Component {
                     <div className={styles.uploadField}>
                         <div className={styles.fileContainer}>
                             <div className={styles.cover}>
-                                {this.state.selectedFileName === "" ? "Drop a file here or Click to select file" : this.state.selectedFileName}
+                                Drop a file here or Click to select file
                             </div>
                             <input ref="file" type="file" name="file" onChange={this.handleSelectFile}/>
                         </div>
-                        <button onClick={this.handleUploadFile}>Upload</button>
+                        {/*<button onClick={this.handleUploadFile}>Upload</button>*/}
                     </div>
                     {
                         app.qrcode.length > 0

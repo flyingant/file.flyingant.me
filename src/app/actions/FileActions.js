@@ -60,24 +60,4 @@ export function filterFilesFailed(payload) {
   };
 }
 
-export function createQRcode(payload) {
-  return {
-    type: CREATE_QRCODE,
-    payload: payload
-  };
-}
-
-export function createQRCompleted(payload) {
-  return {
-    type: CREATE_QRCODE_COMPLETED,
-    payload: payload
-  };
-}
-
-export function clearQRCode() {
-  return {
-    type: CLEAR_QRCODE
-  };
-}
-
 

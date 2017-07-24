@@ -52,9 +52,6 @@ class PaginationTable extends React.Component {
                   <a onClick={() => this.onClickToCopy(file.externalLink)}>
                     <FontAwesome name="clipboard"/>
                   </a>
-                  <a onClick={() => this.props.onCreateQRCode(file.externalLink)}>
-                    <FontAwesome name="qrcode"/>
-                  </a>
                   {
                     file.mimeType.indexOf('image') !== -1
                         ? <a href={`http://www.flyingant.me/file/v/${file.uuid}`} target="_blank">

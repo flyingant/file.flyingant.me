@@ -6,9 +6,7 @@ import {
     UPLOAD_FILE_FAILED,
     FILTER_FILES,
     FILTER_FILES_COMPLETED,
-    FILTER_FILES_FAILED,
-    CREATE_QRCODE_COMPLETED,
-    CLEAR_QRCODE
+    FILTER_FILES_FAILED
 } from '../actions/FileActionTypes';
 
 const DEFAULT_APP_STATE = {
@@ -22,8 +20,7 @@ const DEFAULT_APP_STATE = {
     nextOffset: 0,
     status: 'Pending', //Pending, Uploading, Uploaded, Filtering
     selectedFile: null,
-    files: [],
-    qrcode: ''
+    files: []
 };
 
 function app(state, action) {
@@ -48,14 +45,6 @@ function app(state, action) {
             });
         case FILTER_FILES_COMPLETED :
             return state.merge(action.payload);
-        case CREATE_QRCODE_COMPLETED :
-            return state.merge({
-                qrcode: action.payload.base64
-            });
-        case CLEAR_QRCODE :
-            return state.merge({
-                qrcode: ''
-            });
         default:
             return currentState;
     }

@@ -6,7 +6,7 @@ module.exports = {
   upload: (data) => {
     return new Promise((resolve, reject) => {
       agent
-        .post(BASE_URL + 'api/file')
+        .post(BASE_URL + 'file')
         .send(data.payload.formData)
         .end((err, res) => {
           if (err || res.statusCode !== 200) return reject(res || err)
@@ -18,7 +18,7 @@ module.exports = {
   filter: (data) => {
     return new Promise((resolve, reject) => {
       agent
-        .post(BASE_URL + 'api/file/filter')
+        .post(BASE_URL + 'file/filter')
         .send({
           queryString: data.payload.queryString,
           offset: data.payload.offset,

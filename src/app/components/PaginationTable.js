@@ -52,6 +52,13 @@ class PaginationTable extends React.Component {
                   <a onClick={() => this.onClickToCopy(file.externalLink)}>
                     <FontAwesome name="clipboard"/>
                   </a>
+                  {
+                    file.mimeType.indexOf('image') != -1 &&
+                    <a href={`https://image-preview.flyingant.me/?url=${encodeURIComponent(file.externalLink)}`}
+                       target="_blank">
+                      <FontAwesome name="file-image"/>
+                    </a>
+                  }
                 </td>
               </tr>
             )

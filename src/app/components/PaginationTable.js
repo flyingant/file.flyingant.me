@@ -56,7 +56,7 @@ class PaginationTable extends React.Component {
                     file.mimeType.indexOf('image') != -1 &&
                     <a href={`https://image-preview.flyingant.me/?url=${encodeURIComponent(file.externalLink)}`}
                        target="_blank">
-                      <FontAwesome name="file-image"/>
+                      <FontAwesome name="image"/>
                     </a>
                   }
                 </td>

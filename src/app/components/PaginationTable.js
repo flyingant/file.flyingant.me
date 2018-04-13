@@ -31,6 +31,7 @@ class PaginationTable extends React.Component {
           <thead>
             <tr>
               <th>Name</th>
+              <th className={styles.mobileToHide}>MimeType</th>
               <th className={styles.mobileToHide}>Type</th>
               <th>Size</th>
               <th className={styles.mobileToHide}>Create Date</th>
@@ -43,6 +44,7 @@ class PaginationTable extends React.Component {
                 <tr data-uuid={file.uuid} key={file.uuid}>
                 <td>{file.name}</td>
                 <td className={styles.mobileToHide}>{file.mimeType}</td>
+                  <td className={styles.mobileToHide}>{file.type ? file.type : 'File'}</td>
                 <td>{parseInt(Number(file.size)/1000) + ' KB'}</td>
                   <td className={styles.mobileToHide}>{moment(file.dateCreated).fromNow()}</td>
                 <td>

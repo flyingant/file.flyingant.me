@@ -21,9 +21,11 @@ class HomeContainer extends React.Component {
         this.state ={
             queryString: this.props.app.queryString,
             selectedFile: null,
+            fileType: '',
             selectedFileName: ""
         };
         this.handleChangeQuery = this.handleChangeQuery.bind(this);
+        this.handleChangeFileType = this.handleChangeFileType.bind(this);
         this.handleFilterFiles = this.handleFilterFiles.bind(this);
         this.handleSelectFile = this.handleSelectFile.bind(this);
         this.handleUploadFile = this.handleUploadFile.bind(this);
@@ -57,14 +59,22 @@ class HomeContainer extends React.Component {
             selectedFileName: file.name
         });
         formData.append('file', file);
+        formData.append('type', this.state.fileType);
         this.props.dispatch(uploadFile({
             formData: formData
         }));
     }
 
+    handleChangeFileType(event) {
+        this.setState({
+            fileType: event.target.value,
+        });
+    }
+
     handleUploadFile() {
         var formData = new FormData();
         formData.append('file', this.state.selectedFile);
+        formData.append('type', this.state.fileType);
         this.props.dispatch(uploadFile({
             formData: formData
         }));
@@ -106,6 +116,8 @@ class HomeContainer extends React.Component {
                             </div>
                             <input ref="file" type="file" name="file" onChange={this.handleSelectFile}/>
                         </div>
+                        <input ref="fileType" type="text" name="type" placeholder="File Type (optional)"
+                               onChange={this.handleChangeFileType}/>
                     </div>
                     <div className={styles.searchField}>
                         <input type="text" name="search" onChange={this.handleChangeQuery}/>
